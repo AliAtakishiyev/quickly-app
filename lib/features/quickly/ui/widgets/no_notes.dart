@@ -16,10 +16,10 @@ class NoNotes extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Container(
-                width: 150,
-                height: 150,
+                width: 80,
+                height: 80,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color(0xff2D3138),
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
@@ -39,12 +39,8 @@ class NoNotes extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   child: SvgPicture.asset(
                     "assets/icons/note_icon.svg",
-                    colorFilter: ColorFilter.mode(
-                      Color(0xff1B6CDF),
-                      BlendMode.srcIn,
-                    ),
-                    width: 80,
-                    height: 80,
+                    width: 40,
+                    height: 40,
                   ),
                 ),
               ),
@@ -54,43 +50,45 @@ class NoNotes extends StatelessWidget {
               "No notes yet",
               style: TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 40,
-                color: Color(0xff2A303A),
+                fontSize: 32,
+                color: Colors.white,
               ),
             ),
 
+            SizedBox(height: 12),
+
             Text(
-              "Start capturing your thoughts, ideas, and reminders in one beautiful place",
+              "Create your first note by tapping the button below.",
               style: TextStyle(
                 fontWeight: FontWeight.normal,
                 fontSize: 18,
-                color: Color(0xff2A303A),
+                color: Color(0xff808999),
               ),
+              textAlign: .center,
             ),
 
             SizedBox(height: 24),
 
             SizedBox(
               height: 48,
-              width: 100 , //ScreenSize.width(context) * 0.6
+              width: 150,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff2679E8),
+                  backgroundColor: Color(0xff30AAE9),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => Dialog(),
-                  );
-
-                  
+                  showDialog(context: context, builder: (context) => Dialog());
                 },
                 child: Text(
-                  "+ Create Your First Note",
-                  style: TextStyle(color: Colors.white),
+                  "Create Note",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: .bold,
+                  ),
                 ),
               ),
             ),
