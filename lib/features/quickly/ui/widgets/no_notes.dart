@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quickly_app/features/quickly/ui/widgets/create_note_dialog.dart';
 
 class NoNotes extends StatelessWidget {
   const NoNotes({super.key});
@@ -80,7 +81,7 @@ class NoNotes extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  showDialog(context: context, builder: (context) => Dialog());
+                  showDialog(context: context, builder: (context) => CreateNoteDialog());
                 },
                 child: Text(
                   "Create Note",
