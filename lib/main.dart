@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quickly_app/features/ui/pages/home_screen.dart';
+import 'package:quickly_app/features/quickly/ui/pages/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
