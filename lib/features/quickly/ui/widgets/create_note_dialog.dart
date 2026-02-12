@@ -60,13 +60,14 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
 
               TextField(
                 controller: titleController,
+                style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Color(0xff212027),
                   hint: Text(
-                    "Give your note a title...",
+                    "Note title",
                     style: TextStyle(
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.bold,
                       fontSize: 22,
                       color: Color(0xff808999),
                     ),
@@ -81,7 +82,7 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
 
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Color(0xff2A7DED), width: 3),
+                    borderSide: BorderSide(color: Color(0xff30AAE9), width: 3),
                   ),
                 ),
               ),
@@ -90,12 +91,13 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
 
               TextField(
                 controller: contentController,
+                style: TextStyle(color: Colors.white),
                 maxLines: 10,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Color(0xff212027),
                   hint: Text(
-                    "What's in your mind?",
+                    "Write your note?",
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontSize: 16,
@@ -112,7 +114,7 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
 
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Color(0xff2A7DED), width: 3),
+                    borderSide: BorderSide(color: Color(0xff30AAE9), width: 3),
                   ),
                 ),
               ),
