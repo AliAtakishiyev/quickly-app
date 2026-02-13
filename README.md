@@ -15,7 +15,7 @@ A Flutter note-taking app with local storage (Hive) and AI-powered summarization
 
 3. **Generate Hive adapters** (required for the note model):
    ```bash
-   dart run build_runner build
+   dart run build_runner build (dart run build_runner build --delete-conflicting-outputs)
    ```
 
 4. **Configure the API key** (see below), then run:
