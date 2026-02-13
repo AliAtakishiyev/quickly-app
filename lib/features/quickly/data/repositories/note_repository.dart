@@ -33,12 +33,12 @@ class NoteRepository {
   Future<void> editNote(String title, String content, final hiveId) async {
     final note = box.get(hiveId);
 
-    if (note != Null) {
-      note!.title = title;
+    if (note != null) {
+      note.title = title;
       note.content = content;
       note.editedDate = DateTime.now();
-    }
 
-    await box.put(hiveId, note!);
+      await box.put(hiveId, note);
+    }
   }
 }
