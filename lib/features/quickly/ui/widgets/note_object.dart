@@ -27,6 +27,7 @@ class NoteObject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final date = _formatDate(note.editedDate);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -34,7 +35,7 @@ class NoteObject extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NoteDetailsScreen(note: note),
+              builder: (context) => NoteDetailsScreen(note: note, date: date),
             ),
           );
         },
@@ -78,7 +79,7 @@ class NoteObject extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                _formatDate(note.editedDate),
+                date,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 14,
