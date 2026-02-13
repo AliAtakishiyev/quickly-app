@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
-            width: .infinity,
+            width: double.infinity,
             child: Row(
               children: [
                 Container(
@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 28,
                     color: Colors.white,
-                    fontWeight: .w700,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],

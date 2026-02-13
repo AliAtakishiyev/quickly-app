@@ -65,7 +65,7 @@ class NoNotes extends StatelessWidget {
                 fontSize: 18,
                 color: Color(0xff808999),
               ),
-              textAlign: .center,
+              textAlign: TextAlign.center,
             ),
 
             SizedBox(height: 24),
@@ -88,7 +88,7 @@ class NoNotes extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
-                    fontWeight: .bold,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
