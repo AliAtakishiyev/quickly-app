@@ -40,7 +40,7 @@ class NoteRepository {
     }
   }
 
-  Future<void> addSummarize(String summarize, final hiveId) async {
+  Future<void> addSummarize(String summarize, int hiveId) async {
     final note = box.get(hiveId);
 
     if (note != null) {

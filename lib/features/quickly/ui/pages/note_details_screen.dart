@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quickly_app/features/quickly/models/note_model.dart';
 import 'package:quickly_app/features/quickly/providers/note_provider.dart';
 import 'package:quickly_app/features/quickly/providers/openai_provider.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/edit_note_dialog.dart';
@@ -7,8 +8,7 @@ import 'package:quickly_app/features/quickly/ui/widgets/go_back.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/summary_ai.dart';
 
 class NoteDetailsScreen extends StatefulWidget {
-  final dynamic note;
-
+  final Note note;
   final dynamic date;
 
   const NoteDetailsScreen({super.key, required this.note, required this.date});
@@ -18,33 +18,23 @@ class NoteDetailsScreen extends StatefulWidget {
 }
 
 class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Clear summary when opening a new note
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     context.read<OpenaiProvider>().clearSummary();
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff17171F),
+      backgroundColor: const Color(0xff17171F),
       body: SafeArea(
         child: Consumer<NoteProvider>(
           builder: (context, noteProvider, child) {
-            // Get the current note from provider using the key
             final currentNote = noteProvider.notes.firstWhere(
               (n) => n.key == widget.note.key,
-              orElse: () => widget.note, // Fallback to original if not found
+              orElse: () => widget.note,
             );
 
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GoBack(),
+                  const GoBack(),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -53,39 +43,47 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        /// TITLE
                         Text(
                           currentNote.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 8),
+
+                        const SizedBox(height: 8),
+
+                        /// DATE
                         Text(
                           widget.date.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xff707785),
                             fontSize: 16,
                           ),
                         ),
-                        SizedBox(height: 24),
+
+                        const SizedBox(height: 24),
+
+                        /// CONTENT
                         Text(
-                          currentNote.content.toString(),
-                          style: TextStyle(
+                          currentNote.content,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 16),
 
-                        //summarize here
+                        const SizedBox(height: 16),
+
+                        /// AI + SUMMARY SECTION
                         Consumer<OpenaiProvider>(
                           builder: (context, ai, child) {
                             if (ai.isLoading) {
-                              return Center(
-                                child: const CircularProgressIndicator(
+                              return const Center(
+                                child: CircularProgressIndicator(
                                   color: Color(0xff30AAE9),
                                 ),
                               );
@@ -98,19 +96,22 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
                               );
                             }
 
-                            if (ai.summary != null) {
-                              
-                              return SummaryAi(summary: ai.summary);
+                            if (currentNote.summarize.isNotEmpty) {
+                              return SummaryAi(summary: currentNote.summarize);
                             }
 
                             return const SizedBox.shrink();
                           },
                         ),
 
-                        Container(height: 1, color: Color(0xff32343F)),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 16),
+                        Container(height: 1, color: const Color(0xff32343F)),
+                        const SizedBox(height: 12),
+
+                        /// BUTTONS
                         Row(
                           children: [
+                            /// EDIT
                             Expanded(
                               child: ElevatedButton.icon(
                                 onPressed: () async {
@@ -123,92 +124,83 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
                                 icon: const Icon(
                                   Icons.edit_outlined,
                                   color: Colors.white,
-                                  size: 20,
                                 ),
                                 label: const Text(
                                   'Edit',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: TextStyle(color: Colors.white),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xff2D2D3A),
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 16,
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  elevation: 0,
                                 ),
                               ),
                             ),
+
                             const SizedBox(width: 12),
+
+                            /// SUMMARIZE
                             Expanded(
                               child: ElevatedButton.icon(
                                 onPressed: () async {
-                                  context.read<OpenaiProvider>().summarizeNote(
-                                    widget.note.content,
+                                  final ai = context.read<OpenaiProvider>();
+                                  final noteProvider = context
+                                      .read<NoteProvider>();
+
+                                  final summary = await ai.summarizeNote(
+                                    currentNote.content,
                                   );
+
+                                  if (summary != null && summary.isNotEmpty) {
+                                    await noteProvider.addSummarize(
+                                      summary,
+                                      currentNote.key as int,
+                                    );
+                                  }
                                 },
                                 icon: const Icon(
                                   Icons.auto_awesome_outlined,
                                   color: Color(0xff17171F),
-                                  size: 20,
                                 ),
                                 label: const Text(
                                   'Summarize',
-                                  style: TextStyle(
-                                    color: Color(0xff17171F),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                  style: TextStyle(color: Color(0xff17171F)),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xff30AAE9),
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 16,
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  elevation: 0,
                                 ),
                               ),
                             ),
+
                             const SizedBox(width: 12),
+
+                            /// DELETE
                             Expanded(
                               child: ElevatedButton.icon(
                                 onPressed: () async {
                                   await context.read<NoteProvider>().deleteNote(
-                                    currentNote.key,
+                                    currentNote.key as int,
                                   );
+
                                   Navigator.pop(context);
                                 },
                                 icon: const Icon(
                                   Icons.delete_outline,
                                   color: Color(0xffFF6B6B),
-                                  size: 20,
                                 ),
                                 label: const Text(
                                   'Delete',
-                                  style: TextStyle(
-                                    color: Color(0xffFF6B6B),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: TextStyle(color: Color(0xffFF6B6B)),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xff2D2D3A),
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 16,
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  elevation: 0,
                                 ),
                               ),
                             ),
