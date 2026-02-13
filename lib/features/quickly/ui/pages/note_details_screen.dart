@@ -91,7 +91,7 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
 
                             if (ai.error != null) {
                               return Text(
-                                ai.error!,
+                                "Connection lost. Please try later",
                                 style: const TextStyle(color: Colors.red),
                               );
                             }
