@@ -23,7 +23,7 @@ class NoteDetailsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Column(
-                crossAxisAlignment: .start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     note.title,
@@ -47,7 +47,7 @@ class NoteDetailsScreen extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
-                      fontWeight: .bold,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
 

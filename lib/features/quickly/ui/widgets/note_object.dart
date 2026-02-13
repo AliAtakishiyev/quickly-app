@@ -27,7 +27,7 @@ class NoteObject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final date = _formatDate(note.editedDate);
+    final date = _formatDate(note.createdDate);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(

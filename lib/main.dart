@@ -9,13 +9,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteAdapter());
+
+  if (await Hive.boxExists(notesBoxName)) {
+    if (Hive.isBoxOpen(notesBoxName)) {
+      await Hive.box<Note>(notesBoxName).close();
+    }
+    //await Hive.deleteBoxFromDisk(notesBoxName);
+  }
+
   await Hive.openBox<Note>(notesBoxName);
-
-  //   if (Hive.isBoxOpen('notes')) {
-  //   await Hive.box<Note>('notes').close();
-  // }
-
-  // await Hive.deleteBoxFromDisk('notes');
   runApp(const MyApp());
 }
 

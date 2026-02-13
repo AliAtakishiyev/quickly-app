@@ -19,7 +19,6 @@ class NoteRepository {
       title: title,
       content: content,
       createdDate: createdDate,
-      editedDate: editedDate,
       summarize: summarize,
     );
     final id = await box.add(note);
@@ -36,8 +35,7 @@ class NoteRepository {
     if (note != null) {
       note.title = title;
       note.content = content;
-      note.editedDate = DateTime.now();
-
+      note.createdDate = DateTime.now();
       await box.put(hiveId, note);
     }
   }

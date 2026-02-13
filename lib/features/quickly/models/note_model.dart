@@ -16,16 +16,12 @@ class Note extends HiveObject {
   DateTime createdDate;
 
   @HiveField(3)
-  DateTime editedDate;
-
-  @HiveField(4)
   String summarize;
 
   Note({
     required this.title,
     required this.content,
     required this.createdDate,
-    required this.editedDate,
     required this.summarize,
   });
 
@@ -33,14 +29,12 @@ class Note extends HiveObject {
     String? title,
     String? content,
     DateTime? createdDate,
-    DateTime? editedDate,
     String? summarize,
   }) {
     return Note(
       title: title ?? this.title,
       content: content ?? this.content,
       createdDate: createdDate ?? this.createdDate,
-      editedDate: editedDate ?? this.editedDate,
       summarize: summarize ?? this.summarize,
     );
   }
