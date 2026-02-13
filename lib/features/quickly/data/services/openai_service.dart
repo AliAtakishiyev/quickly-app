@@ -29,11 +29,11 @@ class OpenAIService {
           {
             'role': 'system',
             'content':
-                'You are a helpful assistant that summarizes user notes concisely.',
+                'You are a helpful assistant that summarizes user notes concisely. Max length of summarize is 2-3 short sentences',
           },
           {
             'role': 'user',
-            'content': 'Summarize this note in 2-3 sentences:\n\n$content',
+            'content': 'Summarize this note in max 2-3 sentences:\n\n$content',
           },
         ],
         'temperature': 0.4,
