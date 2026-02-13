@@ -4,6 +4,7 @@ import 'package:quickly_app/features/quickly/providers/note_provider.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/create_note_dialog.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/custom_app_bar.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/no_notes.dart';
+import 'package:quickly_app/features/quickly/ui/widgets/note_object.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,7 +18,23 @@ class HomeScreen extends StatelessWidget {
           children: [
             CustomAppBar(),
 
-            Expanded(child: Center(child: NoNotes())),
+            Expanded(
+              child: Consumer<NoteProvider>(
+                builder: (context, provider, _) {
+                  if (provider.notes.isEmpty) {
+                    return Center(child: NoNotes());
+                  }
+
+                  return ListView.builder(
+                    itemCount: provider.notes.length,
+                    itemBuilder: (context, index) {
+                      final note = provider.notes[index];
+                      return NoteObject(note: note);
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
