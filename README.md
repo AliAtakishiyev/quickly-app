@@ -63,8 +63,7 @@ If `OPENAI_API_KEY` is missing or empty, the app will throw when using AI summar
 | Package | Purpose |
 |--------|---------|
 | **hive_generator** / **build_runner** | Generate Hive type adapters from `Note` model. |
-| **analyzer** | Static analysis. |
-| **flutter_lints** | Recommended Dart/Flutter lint rules. |
+
 
 ---
 
