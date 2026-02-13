@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quickly_app/features/quickly/providers/note_provider.dart';
 
 class CreateNoteDialog extends StatefulWidget {
   const CreateNoteDialog({super.key});
@@ -154,8 +156,16 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
                     child: ElevatedButton(
                       onPressed: () async {
                         String title = titleController.text.trim();
-                        String description = contentController.text.trim();
+                        String content = contentController.text.trim();
                         final now = DateTime.now();
+
+                        await context.read<NoteProvider>().addNote(
+                          title,
+                          content,
+                          '',
+                        );
+
+                        Navigator.of(context).pop();
 
                         //save note logic here
                       },
