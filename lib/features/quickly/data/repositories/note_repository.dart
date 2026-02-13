@@ -39,4 +39,13 @@ class NoteRepository {
       await box.put(hiveId, note);
     }
   }
+
+  Future<void> addSummarize(String summarize, final hiveId) async {
+    final note = box.get(hiveId);
+
+    if (note != null) {
+      note.summarize = summarize;
+      await box.put(hiveId, note);
+    }
+  }
 }

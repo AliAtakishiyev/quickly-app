@@ -6,11 +6,26 @@ import 'package:quickly_app/features/quickly/ui/widgets/edit_note_dialog.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/go_back.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/summary_ai.dart';
 
-class NoteDetailsScreen extends StatelessWidget {
+class NoteDetailsScreen extends StatefulWidget {
   final dynamic note;
+
   final dynamic date;
 
   const NoteDetailsScreen({super.key, required this.note, required this.date});
+
+  @override
+  State<NoteDetailsScreen> createState() => _NoteDetailsScreenState();
+}
+
+class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Clear summary when opening a new note
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     context.read<OpenaiProvider>().clearSummary();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +36,8 @@ class NoteDetailsScreen extends StatelessWidget {
           builder: (context, noteProvider, child) {
             // Get the current note from provider using the key
             final currentNote = noteProvider.notes.firstWhere(
-              (n) => n.key == note.key,
-              orElse: () => note, // Fallback to original if not found
+              (n) => n.key == widget.note.key,
+              orElse: () => widget.note, // Fallback to original if not found
             );
 
             return SingleChildScrollView(
@@ -48,7 +63,7 @@ class NoteDetailsScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          date.toString(),
+                          widget.date.toString(),
                           style: TextStyle(
                             color: Color(0xff707785),
                             fontSize: 16,
@@ -84,6 +99,7 @@ class NoteDetailsScreen extends StatelessWidget {
                             }
 
                             if (ai.summary != null) {
+                              
                               return SummaryAi(summary: ai.summary);
                             }
 
@@ -134,7 +150,7 @@ class NoteDetailsScreen extends StatelessWidget {
                               child: ElevatedButton.icon(
                                 onPressed: () async {
                                   context.read<OpenaiProvider>().summarizeNote(
-                                    note.content,
+                                    widget.note.content,
                                   );
                                 },
                                 icon: const Icon(

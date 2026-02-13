@@ -35,4 +35,9 @@ class NoteProvider extends ChangeNotifier {
     await _repository.editNote(title, content, hiveId);
     loadNotes();
   }
+
+  Future<void> addSummarize(String summarize, int hiveId) async {
+    await _repository.addSummarize(summarize, hiveId);
+    loadNotes();
+  }
 }

@@ -37,7 +37,7 @@ class OpenAIService {
           },
         ],
         'temperature': 0.4,
-        'max-tokens': 80,
+        'max_tokens': 80,
       }),
     );
 
