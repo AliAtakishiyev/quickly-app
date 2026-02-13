@@ -16,54 +16,57 @@ class NoteObject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Color(0xff2D3138),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.15),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            note.title,
-            style: const TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
-              color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Color(0xff2D3138),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: const Offset(0, 4),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            note.content,
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 16,
-              color: Color(0xff808999),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              note.title,
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+                color: Colors.white,
+              ),
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            _formatDate(note.editedDate),
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Color(0xff808999),
+            const SizedBox(height: 8),
+            Text(
+              note.content,
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 16,
+                color: Color(0xff808999),
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              _formatDate(note.editedDate),
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
+                color: Color(0xff808999),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

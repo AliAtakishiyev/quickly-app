@@ -157,8 +157,7 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
                       onPressed: () async {
                         String title = titleController.text.trim();
                         String content = contentController.text.trim();
-                        final now = DateTime.now();
-
+                        
                         await context.read<NoteProvider>().addNote(
                           title,
                           content,
