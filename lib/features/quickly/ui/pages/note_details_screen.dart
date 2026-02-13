@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quickly_app/features/quickly/providers/note_provider.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/go_back.dart';
 
 class NoteDetailsScreen extends StatelessWidget {
@@ -58,7 +60,7 @@ class NoteDetailsScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () async {},
                           icon: const Icon(
                             Icons.edit_outlined,
                             color: Colors.white,
@@ -116,7 +118,13 @@ class NoteDetailsScreen extends StatelessWidget {
 
                       Expanded(
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await context.read<NoteProvider>().deleteNote(
+                              note.key,
+                            );
+
+                            Navigator.pop(context);
+                          },
                           icon: const Icon(
                             Icons.delete_outline,
                             color: Color(0xffFF6B6B),
