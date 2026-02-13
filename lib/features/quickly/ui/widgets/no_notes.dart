@@ -81,7 +81,7 @@ class NoNotes extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  showDialog(context: context, builder: (context) => CreateNoteDialog());
+                  showDialog(context: context, builder: (context) => CreateNoteDialog(note: null,));
                 },
                 child: Text(
                   "Create Note",

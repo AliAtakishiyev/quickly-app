@@ -3,14 +3,16 @@ import 'package:provider/provider.dart';
 import 'package:quickly_app/features/quickly/models/note_model.dart';
 import 'package:quickly_app/features/quickly/providers/note_provider.dart';
 
-class CreateNoteDialog extends StatefulWidget {
-  const CreateNoteDialog({super.key, required this.note});
-  final Note? note;
+class EditNoteDialog extends StatefulWidget {
+  final Note note;
+
+  const EditNoteDialog({super.key, required this.note});
+
   @override
-  State<CreateNoteDialog> createState() => _CreateNoteDialogState();
+  State<EditNoteDialog> createState() => _EditNoteDialogState();
 }
 
-class _CreateNoteDialogState extends State<CreateNoteDialog> {
+class _EditNoteDialogState extends State<EditNoteDialog> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
 
@@ -19,6 +21,14 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
     titleController.dispose();
     contentController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    titleController.text = widget.note.title;
+    contentController.text = widget.note.content;
+
+    super.initState();
   }
 
   @override
@@ -51,7 +61,7 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
               ),
 
               Text(
-                "New Note",
+                "Edit Note",
                 style: TextStyle(
                   fontWeight: FontWeight.w800,
                   fontSize: 32,
@@ -159,15 +169,14 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
                         String title = titleController.text.trim();
                         String content = contentController.text.trim();
 
-                        await context.read<NoteProvider>().addNote(
+                        await context.read<NoteProvider>().editNote(
                           title,
                           content,
-                          '',
+                          widget.note.key,
                         );
+                        setState(() {});
 
                         Navigator.of(context).pop();
-
-                        //save note logic here
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff30AAE9),
@@ -176,7 +185,7 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
                         ),
                       ),
                       child: Text(
-                        "Create",
+                        "Edit",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
