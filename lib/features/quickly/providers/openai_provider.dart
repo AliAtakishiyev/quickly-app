@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quickly_app/features/quickly/data/repositories/openai_repositories.dart';
 
-class AIProvider extends ChangeNotifier {
+class OpenaiProvider extends ChangeNotifier {
   final OpenaiRepositories _repository;
 
-  AIProvider(this._repository);
+  OpenaiProvider(this._repository);
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
