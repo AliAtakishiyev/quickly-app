@@ -29,7 +29,7 @@ class OpenAIService {
           {
             'role': 'system',
             'content':
-                'You are a helpful assistant that summarizes user notes concisely. Max length of summarize is 2-3 short sentences',
+                ' You summarize notes. STRICT RULES: Maximum 2 sentences. Maximum 40 words. No extra explanation. No intro text.',
           },
           {
             'role': 'user',
@@ -37,6 +37,7 @@ class OpenAIService {
           },
         ],
         'temperature': 0.4,
+        'max-tokens': 80,
       }),
     );
 
