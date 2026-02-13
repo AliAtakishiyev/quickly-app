@@ -33,7 +33,9 @@ class NoteObject extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NoteDetailsScreen()),
+            MaterialPageRoute(
+              builder: (context) => NoteDetailsScreen(note: note),
+            ),
           );
         },
         child: Container(
