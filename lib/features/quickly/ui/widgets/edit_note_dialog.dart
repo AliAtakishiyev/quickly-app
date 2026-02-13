@@ -169,14 +169,16 @@ class _EditNoteDialogState extends State<EditNoteDialog> {
                         String title = titleController.text.trim();
                         String content = contentController.text.trim();
 
-                        await context.read<NoteProvider>().editNote(
-                          title,
-                          content,
-                          widget.note.key,
-                        );
-                        setState(() {});
+                        if (title.isNotEmpty && content.isNotEmpty) {
+                          await context.read<NoteProvider>().editNote(
+                            title,
+                            content,
+                            widget.note.key,
+                          );
+                          setState(() {});
 
-                        Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff30AAE9),

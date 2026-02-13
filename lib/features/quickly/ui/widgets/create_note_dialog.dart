@@ -159,13 +159,15 @@ class _CreateNoteDialogState extends State<CreateNoteDialog> {
                         String title = titleController.text.trim();
                         String content = contentController.text.trim();
 
-                        await context.read<NoteProvider>().addNote(
-                          title,
-                          content,
-                          '',
-                        );
+                        if (title.isNotEmpty && content.isNotEmpty) {
+                          await context.read<NoteProvider>().addNote(
+                            title,
+                            content,
+                            '',
+                          );
 
-                        Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        }
 
                         //save note logic here
                       },
