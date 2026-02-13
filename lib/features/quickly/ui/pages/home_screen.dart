@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quickly_app/features/quickly/providers/note_provider.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/create_note_dialog.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/custom_app_bar.dart';
 import 'package:quickly_app/features/quickly/ui/widgets/no_notes.dart';
@@ -15,12 +17,12 @@ class HomeScreen extends StatelessWidget {
           children: [
             CustomAppBar(),
 
-            Expanded(child: Center(child: NoNotes()))
+            Expanded(child: Center(child: NoNotes())),
           ],
-        )
         ),
+      ),
 
-        floatingActionButton: Padding(
+      floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: SizedBox(
           width: 70,
@@ -40,6 +42,5 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
-
   }
 }
