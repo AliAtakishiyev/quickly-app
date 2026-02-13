@@ -15,10 +15,18 @@ class OpenaiProvider extends ChangeNotifier {
   String? _error;
   String? get error => _error;
 
+  void clearSummary() {
+    _summary = null;
+    _error = null;
+    _isLoading = false;
+    notifyListeners();
+  }
+
   Future<void> summarizeNote(String content) async {
     try {
       _isLoading = true;
       _error = null;
+      _summary = null;
       notifyListeners();
 
       final result = await _repository.summarize(content);
