@@ -104,3 +104,11 @@ lib/
 - **Data layer:** `services` call external APIs; `repositories` abstract storage and API usage for the rest of the app.
 - **State:** `Provider` is used for notes and OpenAI; providers use the repositories.
 - **UI:** `pages` are full screens; reusable pieces are in `widgets`.
+- 
+
+
+## Screenshots
+
+<img width="320" height="714" alt="1" src="https://github.com/user-attachments/assets/586838ff-1c22-4b69-85c1-49bb31e154ba" />
+<img width="320" height="714" alt="2" src="https://github.com/user-attachments/assets/a67171d2-0f82-4550-b2c2-11831cbbb70a" />
+
