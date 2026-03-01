@@ -1,5 +1,7 @@
 # Quickly App
 
+**This was my trial test for flutter job**
+
 A Flutter note-taking app with local storage (Hive) and AI-powered summarization via OpenAI.
 
 ---
